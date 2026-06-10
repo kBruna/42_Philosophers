@@ -32,7 +32,7 @@ int	param_quantity(int argc)
 {
 	if (argc < 5 || argc > 6)
 	{
-		return_error("Wrong Number of Parameters", ERROR_PARAMETERS);
+		return_error("Wrong Number of Parameters", 1);
 		return (0);
 	}
 	return (1);
@@ -47,12 +47,12 @@ int	parameters_verify(int argc, char **argv)
 	{
 		if (argv[idx][0] == '\0')
 		{
-			return_error("Null Parameters", NULL);
+			return_error("Null Parameters", 0);
 			return (0);
 		}
 		if (!arg_check(argv[idx]))
 		{
-			return_error("Invalid Parameters", NULL);
+			return_error("Invalid Parameters", 0);
 			return (0);
 		}
 		idx++;
