@@ -21,8 +21,9 @@ int	arg_check(char *arg)
 	idx = 0;
 	while (arg[idx] != '\0')
 	{
-		if (arg[idx] > '9' || arg[idx] < '0' || arg[idx] != ' ')
+		if (arg[idx] > '9' || arg[idx] < '0')
 			return (0);
+		idx++;
 	}
 	return (1);
 }
@@ -59,20 +60,23 @@ int	parameters_verify(int argc, char **argv)
 	return (1);
 }
 
-int	*parsing(int argc, char **argv)
+long	*parsing(int argc, char **argv)
 {
-	int	idx;
-	int	*nbr;
+	int		idx;
+	long	*nbr;
 
-	idx = 0;
 	if (!param_quantity(argc))
 		return (NULL);
 	if (!parameters_verify(argc, argv))
 		return (NULL);
-	nbr = malloc(sizeof(int) * (argc - 1));
+	nbr = ft_calloc(sizeof(long), argc);
 	if (!nbr)
 		return (NULL);
-	while (--idx > 0)
-		nbr[idx - 1] = ft_atoi(argv[idx]);
+	idx = 1;
+	while (idx < argc)
+	{
+		nbr[idx - 1] = ft_atol(argv[idx]);
+		idx++;
+	}
 	return (nbr);
 }

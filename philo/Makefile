@@ -27,6 +27,7 @@ CFLAGS		= -Wall -Wextra -Werror -g3
 
 SRCS_FILES	= main.c \
 			  parsing.c \
+			  philo_lib.c	\
 			  philo_utils.c
 
 SRCS		= $(SRCS_FILES)

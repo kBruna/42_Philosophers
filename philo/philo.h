@@ -18,20 +18,21 @@
 # include <stdlib.h>
 # include <pthread.h>
 
-# define ERROR_PARAMETERS "Recommended Use: >$ ./philosophers\
-        <number_of_philosophers> <time_to_die> <time_to_eat> <time_to_sleep>\
+# define ERROR_PARAMETERS "Recommended Use: >$ ./philosophers <number_of_philosophers> <time_to_die> <time_to_eat> <time_to_sleep>\
 		[number_of_times_each_philosopher_must_eat]"
 
 // Parsing.c
-int	arg_check(char *arg);
-int	param_quantity(int argc);
-int	parameters_verify(int argc, char **argv);
-int	*parsing(int argc, char **argv);
+int		arg_check(char *arg);
+int		param_quantity(int argc);
+int		parameters_verify(int argc, char **argv);
+long	*parsing(int argc, char **argv);
 
 // Philo_utils.c
-int	ft_atoi(char *str);
-int	ft_strlen(char *str);
+int		return_error(char *msg, char *msg2);
 
-// Main.c
-int	return_error(char *msg, char *msg2);
+// Philo_lib.c
+int		ft_strlen(char *str);
+long	ft_atol(char *str);
+void	*ft_calloc(size_t nmemb, size_t size);
+
 #endif
