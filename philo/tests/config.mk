@@ -10,7 +10,8 @@
 # Every .c file your tests call into. None of them may define main()!
 # Paths are relative to this tests/ folder.
 PROJECT_SRCS = ../parsing.c		\
-				../philo_utils.c
+				../philo_utils.c	\
+				../philo_lib.c
 
 # --- Include paths ---------------------------------------------------
 # -I flags so the compiler finds your project headers.

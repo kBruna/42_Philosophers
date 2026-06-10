@@ -64,6 +64,7 @@ long	*parsing(int argc, char **argv)
 {
 	int		idx;
 	long	*nbr;
+	long	temp;
 
 	if (!param_quantity(argc))
 		return (NULL);
@@ -75,7 +76,14 @@ long	*parsing(int argc, char **argv)
 	idx = 1;
 	while (idx < argc)
 	{
-		nbr[idx - 1] = ft_atol(argv[idx]);
+		temp = ft_atol(argv[idx]);
+		if (temp == -1)
+		{
+			free(nbr);
+			return_error("Invalid input", 0);
+			return (NULL);
+		}
+		nbr[idx - 1] = temp;
 		idx++;
 	}
 	return (nbr);
