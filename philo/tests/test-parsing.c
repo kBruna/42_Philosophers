@@ -3,8 +3,8 @@
 
 int	parsing_invalid_paramn_qtt_more(void)
 {
-	char	*list[7] = {"1", "1", "1", "2147483647", "1", "1", NULL};
-	long	*nbr = parsing(7, list);
+	char	*list[8] = {"", "1", "1", "1", "2147483647", "1", "1", NULL};
+	long	*nbr = parsing(8, list);
 
 	ASSERT_NULL(nbr);
 	return(EXIT_SUCCESS);
@@ -12,11 +12,11 @@ int	parsing_invalid_paramn_qtt_more(void)
 
 int	parsing_valid_paramn_qtt_optional(void)
 {
-	char	*list[6] = {"2147483647", "1","1", "1", "1", NULL};
+	char	*list[6] = {"", "2147483647", "1","1", "1", "1"};
 	long	number[5] = {2147483647, 1, 1, 1, 1};
 	long	*nbr = parsing(6, list);
 
-	//ASSERT_NOT_NULL(nbr);
+	ASSERT_NOT_NULL(nbr);
 	ASSERT_EQ(nbr[0], number[0]);
 	ASSERT_EQ(nbr[1], number[1]);
 	ASSERT_EQ(nbr[2], number[2]);
@@ -27,7 +27,7 @@ int	parsing_valid_paramn_qtt_optional(void)
 
 int	parsing_invalid_paramn_qtt_less(void)
 {
-	char	*list[4] = {"2147483647", "-1", "1", NULL};
+	char	*list[4] = {"", "2147483647", "1", "1"};
 	long	*nbr = parsing(4, list);
 
 	ASSERT_NULL(nbr);
@@ -36,8 +36,8 @@ int	parsing_invalid_paramn_qtt_less(void)
 
 int	parsing_invalid_input_char_plus(void)
 {
-	char	*list[5] = {"2147483647", "-1", "1", "1", NULL};
-	long	*nbr = parsing(5, list);
+	char	*list[6] = {"", "2147483647", "+1", "1", "1", NULL};
+	long	*nbr = parsing(6, list);
 
 	ASSERT_NULL(nbr);
 	return(EXIT_SUCCESS);
@@ -45,8 +45,8 @@ int	parsing_invalid_input_char_plus(void)
 
 int	parsing_invalid_input_char_minus(void)
 {
-	char	*list[5] = {"2147483647", "-1", "1", "1", NULL};
-	long	*nbr = parsing(5, list);
+	char	*list[6] = {"", "2147483647", "-1", "1", "1", NULL};
+	long	*nbr = parsing(6, list);
 
 	ASSERT_NULL(nbr);
 	return(EXIT_SUCCESS);
@@ -54,8 +54,8 @@ int	parsing_invalid_input_char_minus(void)
 
 int	parsing_invalid_input_int_max(void)
 {
-	char	*list[5] = {"2147483648", "1", "1", "1", NULL};
-	long	*nbr = parsing(5, list);
+	char	*list[6] = {"", "2147483648", "1", "1", "1", NULL};
+	long	*nbr = parsing(6, list);
 
 	ASSERT_NULL(nbr);
 	return(EXIT_SUCCESS);
@@ -63,11 +63,11 @@ int	parsing_invalid_input_int_max(void)
 
 int	parsing_valid_input_int_max(void)
 {
-	char	*list[5] = {"2147483647", "1", "1", "1", NULL};
+	char	*list[6] = {"", "2147483647", "1", "1", "1", NULL};
 	long	number[4] = {2147483647, 1, 1, 1};
-	long	*nbr = parsing(5, list);
+	long	*nbr = parsing(6, list);
 
-	//ASSERT_NOT_NULL(nbr);
+	ASSERT_NOT_NULL(nbr);
 	ASSERT_EQ(nbr[0], number[0]);
 	ASSERT_EQ(nbr[1], number[1]);
 	ASSERT_EQ(nbr[2], number[2]);
@@ -77,9 +77,9 @@ int	parsing_valid_input_int_max(void)
 
 int	main(void)
 {
-//	RUN_TEST(parsing_valid_input_int_max);
-	//RUN_TEST(parsing_valid_paramn_qtt_optional);
-	//RUN_TEST(parsing_invalid_input_int_max);
+	RUN_TEST(parsing_valid_input_int_max);
+	RUN_TEST(parsing_valid_paramn_qtt_optional);
+	RUN_TEST(parsing_invalid_input_int_max);
 	RUN_TEST(parsing_invalid_input_char_minus);
 	RUN_TEST(parsing_invalid_input_char_plus);
 	RUN_TEST(parsing_invalid_paramn_qtt_less);

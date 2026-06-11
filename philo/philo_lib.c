@@ -23,7 +23,7 @@ long	ft_atol(char *str)
 		return (0);
 	while (str[idx] >= '0' && str[idx] <= '9')
 	{
-		if (nbr >= 214748364 && str[idx] > 7)
+		if (nbr >= 214748364 && str[idx] > '7')
 			return (-1);
 		nbr = nbr * 10 + (str[idx] - '0');
 		idx++;

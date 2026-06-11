@@ -1,13 +1,19 @@
-TEST REPORT - Wed Jun 10 08:36:25 PM -03 2026
+TEST REPORT - Wed Jun 10 09:20:17 PM -03 2026
 ------------------------------------------
 
 File: test-parsing.c
-      [ERROR] Runtime failure (exit code 139)
+      [PASS] Case: parsing_valid_input_int_max
+      [PASS] Case: parsing_valid_paramn_qtt_optional
+      [PASS] Case: parsing_invalid_input_int_max
+      [PASS] Case: parsing_invalid_input_char_minus
+      [PASS] Case: parsing_invalid_input_char_plus
+      [PASS] Case: parsing_invalid_paramn_qtt_less
+      [PASS] Case: parsing_invalid_paramn_qtt_more
 
 ==========================================
 📊 Summary:
-  Total cases:  0
-  ✅ Pass:      0
+  Total cases:  7
+  ✅ Pass:      7
   ❌ Fail:      0
-  ⚠️  Errors:    1
+  ⚠️  Errors:    0
 ==========================================

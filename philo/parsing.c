@@ -43,7 +43,7 @@ int	parameters_verify(int argc, char **argv)
 	int	idx;
 
 	idx = 1;
-	while (idx < argc)
+	while (argv[idx] != NULL && idx < argc)
 	{
 		if (argv[idx][0] == '\0')
 		{
@@ -74,7 +74,7 @@ long	*parsing(int argc, char **argv)
 	if (!nbr)
 		return (NULL);
 	idx = 1;
-	while (idx < argc)
+	while (argv && idx < argc)
 	{
 		temp = ft_atol(argv[idx]);
 		if (temp == -1)
