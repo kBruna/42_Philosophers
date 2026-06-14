@@ -14,13 +14,20 @@
 
 int	main(int argc, char **argv)
 {
-	long	*nbr;
+	t_table	*table;
+	t_philo	**philo;
 
-	nbr = parsing(argc, argv);
-	if (!nbr)
+	table = init_table(argc, argv);
+	if (!table)
 		return (1);
-	for (int i = 0; i < argc - 1; i++)
-		printf("%ld\n", nbr[i]);
-	free(nbr);
+	philo = all_philos(table->philo);
+	if (!philo)
+	{
+		free(table);
+		printf("Malloc Error");
+		return (1);
+	}
+	free_dinner(&philo, table->philo);
+	free(table);
 	return (0);
 }
