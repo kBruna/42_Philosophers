@@ -11,7 +11,9 @@
 # Paths are relative to this tests/ folder.
 PROJECT_SRCS = ../parsing.c		\
 				../philo_utils.c	\
-				../philo_lib.c
+				../philo_lib.c		\
+				../init_structs.c	\
+				../all_free.c
 
 # --- Include paths ---------------------------------------------------
 # -I flags so the compiler finds your project headers.
