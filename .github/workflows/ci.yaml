@@ -10,6 +10,7 @@ jobs:
   norminette:
     runs-on: ubuntu-latest
     steps:
+       - uses: actions/checkout@v6
        - name: norminette
          run: |
              cd philo && pip install norminette
