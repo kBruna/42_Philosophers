@@ -23,4 +23,4 @@ jobs:
       - name: compile philo
         run: cd philo && make
       - name: run tests
-        run: cd philo && cd tests && make tests
+        run: cd philo && cd tests && make test
