@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
        - uses: actions/checkout@v6
-       - uses: 42school/norminette@v3.3.51
+       - uses: 42school/norminette@v3
          with:
           args: '-CheckForbiddenSourceHeader'
 
@@ -20,6 +20,6 @@ jobs:
     steps:
       - uses: actions/checkout@v6
       - name: compile philo
-        run: cp philo && make
+        run: cd philo && make
       - name: run tests
-        run: cp philo && make unit-tests
+        run: cd philo && make unit-tests
