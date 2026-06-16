@@ -14,7 +14,7 @@ jobs:
        - name: norminette
          run: |
              cd philo && pip install norminette
-             norminette $(find . -name "*.[ch] | grep -v tests)
+             norminette $(find . -name "*.[ch]" | grep -v tests)
 
   tests:
     runs-on: ubuntu-latest
