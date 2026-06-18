@@ -1,19 +1,17 @@
 # include "philo.h"
 
-void	free_dinner(t_philo ***dinner, long qtt)
+void	free_dinner(t_table *table)
 {
-	long	philo;
+	long	index;
 
-	philo = 0;
-	while(*dinner && philo < qtt)
+	index = 0;
+	while(index < table->philo)
 	{
-		if (*dinner[philo])
-		{
-			free(*dinner[philo]);
-			*dinner[philo] = NULL;
-		}
-		philo++;
+		pthread_mutex_destroy(table->philos[index].left_fork);
+		free(table->philos[index].left_fork);
+		table->philos[index].left_fork = NULL;
+		index++;
 	}
-	free(*dinner);
-	*dinner = NULL;
+	free(table->philos);
+	free(table);
 }

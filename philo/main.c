@@ -14,20 +14,11 @@
 
 int	main(int argc, char **argv)
 {
-	t_table	*table;
-	t_philo	**philo;
+	t_table	*sim;
 
-	table = init_table(argc, argv);
-	if (!table)
+	sim = init_config(argc, argv);
+	if (!sim)
 		return (1);
-	philo = all_philos(table->philo);
-	if (!philo)
-	{
-		free(table);
-		printf("Malloc Error");
-		return (1);
-	}
-	free_dinner(&philo, table->philo);
-	free(table);
+	free_dinner(sim);
 	return (0);
 }

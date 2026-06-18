@@ -17,8 +17,12 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <pthread.h>
+# include <sys/time.h>
 
 // Structs
+
+typedef struct	s_philo t_philo;
+
 typedef struct	s_table
 {
 	int		simulation;
@@ -27,15 +31,19 @@ typedef struct	s_table
 	long	to_sleep;
 	long	to_die;
 	long	max_meals;
+	t_philo	*philos;
 }				t_table;
 
-typedef struct	s_philo
+struct	s_philo
 {
-	long	index;
-	long	last_meal;
-	long	meals;
-	long	is_alive;
-}				t_philo;
+	long			index;
+	long			last_meal;
+	long			meals;
+	long			is_alive;
+	t_table			*table;
+	pthread_mutex_t	*left_fork;
+	pthread_mutex_t	*right_fork;
+};
 
 // Parsing.c
 int		arg_check(char *arg);
@@ -44,9 +52,9 @@ int		parameters_verify(int argc, char **argv);
 long	*parsing(int argc, char **argv);
 
 // Init_structs.c
-t_philo	**all_philos(long qtt_philo);
-t_philo	*init_philo(long index);
+t_philo	*all_philos(long qtt_philo, t_table *table);
 t_table	*init_table(int argc, char **argv);
+t_table	*init_config(int argc, char **argv);
 
 // Philo_utils.c
 int		return_error(char *msg, int flag);
@@ -57,6 +65,6 @@ long	ft_atol(char *str);
 void	*ft_calloc(size_t nmemb, size_t size);
 
 //Free
-void	free_dinner(t_philo ***dinner, long qtt);
+void	free_dinner(t_table *table);
 
 #endif

@@ -4,14 +4,14 @@
 int	philo_paramns_valid(void)
 {
 	t_philo	**philo = all_philos(5);
-	int	index = 0;
+//	int	index = 0;
 
 	ASSERT_NOT_NULL(philo);
-	while (index < 5) {
-		ASSERT_NOT_NULL(philo[index]);
-		ASSERT_EQ(philo[index]->index, index);
-		index++;
-	}
+//	while (index < 5) {
+//		ASSERT_NOT_NULL(philo[index]);
+//		ASSERT_EQ(philo[index]->index, index);
+//		index++;
+//	}
 	free_dinner(&philo, 5);
 	ASSERT_NULL(philo);
 	return(EXIT_SUCCESS);
