@@ -23,7 +23,8 @@ C_END	= \033[0m
 
 NAME		= philo
 CC			= cc
-CFLAGS		= -Wall -Wextra -Werror -g3
+CFLAGS		= -Wall -Wextra -Werror -pthread
+CFLAGS_TEST	= -Wall -Wextra -Werror -g3 -pthread -fsanitize=thread
 
 SRCS_FILES	= main.c \
 			  parsing.c \
@@ -38,10 +39,18 @@ OBJS_DIR	= obj
 
 OBJS		= $(addprefix $(OBJS_DIR)/, $(SRCS_FILES:.c=.o))
 
+ARGS?="5 300 100 100"
 
 #---- Recipes ----
 
 all : $(NAME)
+
+test: $(OBJS)
+	@echo "\n$(C_GREEN);1m\t -> [ COMPILING ]$(C_END)\n"
+	$(CC) $(CFLAGS_TEST) $(OBJS) -o $(NAME)
+	@echo "\n$(C_GREEN);1m\t -> [ TEST COMPILATION COMPLETED ]$(C_END)\n"
+	valgrind --tool=helgrind \
+		--read-var-info=yes ./philo $(ARGS)
 
 $(NAME) : $(OBJS)
 	@echo "\n$(C_GREEN);1m\t -> [ COMPILING ]$(C_END)\n"
