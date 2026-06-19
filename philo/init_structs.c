@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   init_structs.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: buehara <buehara@student.42sp.org.br>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/06/19 15:52:16 by buehara           #+#    #+#             */
+/*   Updated: 2026/06/19 15:52:29 by buehara          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "philo.h"
 
 void	init_fork_right(t_table *table)
@@ -9,7 +21,7 @@ void	init_fork_right(t_table *table)
 	qtt = table->philo;
 	while (i < qtt)
 	{
-		table->philos[i].right_fork = table->philos[(i + 1)% qtt].left_fork;
+		table->philos[i].right_fork = table->philos[(i + 1) % qtt].left_fork;
 		i++;
 	}
 }
@@ -29,7 +41,7 @@ int	init_fork_left(t_table *table)
 			free_dinner(table);
 			return (1);
 		}
-		if(pthread_mutex_init(table->philos[index].left_fork, NULL))
+		if (pthread_mutex_init(table->philos[index].left_fork, NULL))
 			pthread_mutex_destroy(table->philos[index].left_fork);
 		index++;
 	}

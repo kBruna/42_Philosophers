@@ -6,7 +6,7 @@
 /*   By: buehara <buehara@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/15 21:11:20 by buehara           #+#    #+#             */
-/*   Updated: 2026/01/15 21:17:33 by buehara          ###   ########.fr       */
+/*   Updated: 2026/06/19 15:53:20 by buehara          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,9 @@
 
 // Structs
 
-typedef struct	s_philo t_philo;
+typedef struct s_philo	t_philo;
 
-typedef struct	s_table
+typedef struct s_table
 {
 	int		simulation;
 	long	philo;
