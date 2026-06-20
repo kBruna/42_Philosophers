@@ -1,4 +1,4 @@
-TEST REPORT - Wed Jun 17 06:48:02 PM -03 2026
+TEST REPORT - Fri Jun 19 05:29:23 PM -03 2026
 ------------------------------------------
 
 File: test-parsing.c
@@ -10,11 +10,8 @@ File: test-parsing.c
       [PASS] Case: parsing_invalid_paramn_qtt_less
       [PASS] Case: parsing_invalid_paramn_qtt_more
 
-File: test-philo-init.c
-      [ERROR] Runtime failure (exit code 139)
-
 File: test-table-init.c
-      [PASS] Case: table_five_paramns_valid
+      [PASS] Case: table_four_paramns_valid
       [PASS] Case: table_five_paramns_valid
       [PASS] Case: table_four_paramns_empty_param
       [PASS] Case: table_five_paramns_empty_param
@@ -25,5 +22,5 @@ File: test-table-init.c
   Total cases:  12
   ✅ Pass:      12
   ❌ Fail:      0
-  ⚠️  Errors:    1
+  ⚠️  Errors:    0
 ==========================================

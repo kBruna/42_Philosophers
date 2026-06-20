@@ -19,6 +19,7 @@ int	main(int argc, char **argv)
 	sim = init_config(argc, argv);
 	if (!sim)
 		return (1);
+	init_simulation(sim);
 	free_dinner(sim);
 	return (0);
 }

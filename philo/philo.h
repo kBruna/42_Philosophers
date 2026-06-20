@@ -21,17 +21,29 @@
 
 // Structs
 
+typedef enum e_action
+{
+	FORK,
+	EAT,
+	SLEEP,
+	THINK,
+	DIED
+}			t_action;
+
+
 typedef struct s_philo	t_philo;
 
 typedef struct s_table
 {
-	int		simulation;
-	long	philo;
-	long	to_eat;
-	long	to_sleep;
-	long	to_die;
-	long	max_meals;
-	t_philo	*philos;
+	long			philo;
+	long			to_eat;
+	long			to_sleep;
+	long			to_die;
+	long			max_meals;
+	long			start;
+	t_philo			*philos;
+	pthread_mutex_t	print;
+	int				simulation;
 }				t_table;
 
 struct	s_philo
@@ -41,6 +53,7 @@ struct	s_philo
 	long			meals;
 	long			is_alive;
 	t_table			*table;
+	pthread_t		thread;
 	pthread_mutex_t	*left_fork;
 	pthread_mutex_t	*right_fork;
 };
@@ -52,9 +65,13 @@ int		parameters_verify(int argc, char **argv);
 long	*parsing(int argc, char **argv);
 
 // Init_structs.c
-t_philo	*all_philos(long qtt_philo, t_table *table);
+t_philo	*all_philos(t_table *table);
 t_table	*init_table(int argc, char **argv);
 t_table	*init_config(int argc, char **argv);
+
+// Forks.c
+int		init_fork_left(t_table *table);
+void	init_fork_right(t_table *table);
 
 // Philo_utils.c
 int		return_error(char *msg, int flag);
@@ -63,6 +80,9 @@ int		return_error(char *msg, int flag);
 int		ft_strlen(char *str);
 long	ft_atol(char *str);
 void	*ft_calloc(size_t nmemb, size_t size);
+
+//init_sim.c
+void	init_simulation(t_table *table);
 
 //Free
 void	free_dinner(t_table *table);

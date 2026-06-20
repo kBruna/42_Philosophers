@@ -25,5 +25,6 @@ void	free_dinner(t_table *table)
 		index++;
 	}
 	free(table->philos);
+	pthread_mutex_destroy(&table->print);
 	free(table);
 }
