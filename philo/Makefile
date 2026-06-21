@@ -23,7 +23,7 @@ C_END	= \033[0m
 
 NAME		= philo
 CC			= cc
-CFLAGS		= -Wall -Wextra -Werror -pthread
+CFLAGS		= -Wall -Wextra -Werror -g3 -pthread
 CFLAGS_TEST	= -Wall -Wextra -Werror -g3 -pthread
 
 SRCS_FILES	= main.c \

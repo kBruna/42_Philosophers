@@ -31,12 +31,13 @@ t_table	*init_config(int argc, char **argv)
 
 void	fill_table(t_table *table, long *nbr)
 {
-	table->simulation = 0;
+	table->simulation = 1;
 	table->philo = nbr[0];
 	table->to_die = nbr[1];
 	table->to_eat = nbr[2];
 	table->to_sleep = nbr[3];
-	table->max_meals = -1;
+	table->max_meals = 0;
+	table->has_eaten = 0;
 	table->philos = NULL;
 	if (nbr[4])
 		table->max_meals = nbr[4];
@@ -58,7 +59,8 @@ t_table	*init_table(int argc, char **argv)
 	}
 	fill_table(table, nbr);
 	free(nbr);
-	if(pthread_mutex_init(&table->print, NULL))
+	if(pthread_mutex_init(&table->print, NULL)
+		&& pthread_mutex_init(&table->monitor, NULL))
 	{
 		free_dinner(table);
 		return (NULL);
@@ -79,7 +81,7 @@ t_philo	*all_philos(t_table *table)
 	{
 		array[index].index = index;
 		array[index].is_alive = 1;
-		array[index].last_meal = 0;
+		array[index].last_meal = ft_time();
 		array[index].meals = 0;
 		array[index].table = table;
 		array[index].thread = 0;

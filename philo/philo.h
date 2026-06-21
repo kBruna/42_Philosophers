@@ -40,9 +40,11 @@ typedef struct s_table
 	long			to_sleep;
 	long			to_die;
 	long			max_meals;
+	long			has_eaten;
 	long			start;
 	t_philo			*philos;
 	pthread_mutex_t	print;
+	pthread_mutex_t	monitor;
 	int				simulation;
 }				t_table;
 
@@ -82,6 +84,7 @@ long	ft_atol(char *str);
 void	*ft_calloc(size_t nmemb, size_t size);
 
 //init_sim.c
+long	ft_time(void);
 void	init_simulation(t_table *table);
 
 //Free
