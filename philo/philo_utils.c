@@ -12,6 +12,15 @@
 
 #include "philo.h"
 
+long	ft_time(void)
+{
+	struct timeval	milisec;
+
+	if (gettimeofday(&milisec, NULL))
+		return (0);
+	return ((milisec.tv_sec * 1000) + (milisec.tv_usec / 1000));
+}
+
 int	return_error(char *msg, int flag)
 {
 	write(STDERR_FILENO, &"Error: ", 7);

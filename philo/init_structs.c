@@ -6,7 +6,7 @@
 /*   By: buehara <buehara@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/19 15:52:16 by buehara           #+#    #+#             */
-/*   Updated: 2026/06/19 15:52:29 by buehara          ###   ########.fr       */
+/*   Updated: 2026/06/20 21:54:21 by buehara          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ t_table	*init_table(int argc, char **argv)
 	}
 	fill_table(table, nbr);
 	free(nbr);
-	if(pthread_mutex_init(&table->print, NULL)
+	if (pthread_mutex_init(&table->print, NULL)
 		&& pthread_mutex_init(&table->monitor, NULL))
 	{
 		free_dinner(table);

@@ -6,7 +6,7 @@
 /*   By: buehara <buehara@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/15 21:11:20 by buehara           #+#    #+#             */
-/*   Updated: 2026/06/19 15:53:20 by buehara          ###   ########.fr       */
+/*   Updated: 2026/06/20 21:54:34 by buehara          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ typedef enum e_action
 	THINK,
 	DIED
 }			t_action;
-
 
 typedef struct s_philo	t_philo;
 
@@ -77,6 +76,7 @@ void	init_fork_right(t_table *table);
 
 // Philo_utils.c
 int		return_error(char *msg, int flag);
+long	ft_time(void);
 
 // Philo_lib.c
 int		ft_strlen(char *str);
@@ -86,6 +86,16 @@ void	*ft_calloc(size_t nmemb, size_t size);
 //init_sim.c
 long	ft_time(void);
 void	init_simulation(t_table *table);
+
+//sim_utils.c
+int		is_alive(t_table *table);
+void	kill_simulation(t_table *table);
+void	ft_lone(t_philo *philo);
+void	to_pass_time(t_philo *philo, long time);
+void	philo_print(t_philo philo, int flag);
+
+//monitor.c
+void	waiter(t_table *table);
 
 //Free
 void	free_dinner(t_table *table);

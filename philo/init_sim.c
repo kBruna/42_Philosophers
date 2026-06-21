@@ -1,59 +1,16 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   init_sim.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: buehara <buehara@student.42sp.org.br>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/06/20 21:50:43 by buehara           #+#    #+#             */
+/*   Updated: 2026/06/20 21:54:08 by buehara          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "philo.h"
-
-long	ft_time(void)
-{
-	struct timeval milisec;
-
-	if(gettimeofday(&milisec, NULL))
-		return (0);
-	return ((milisec.tv_sec * 1000) + (milisec.tv_usec / 1000));
-}
-
-int	is_alive(t_table *table)
-{
-	int	err;
-
-	pthread_mutex_lock(&table->monitor);
-	err = table->simulation;
-	pthread_mutex_unlock(&table->monitor);
-	return err;
-}
-
-void	philo_print(t_philo philo, int flag)
-{
-	long	time;
-
-	pthread_mutex_lock(&philo.table->print);
-	time = ft_time() - philo.table->start;
-	if (flag == DIED)
-		printf("%ld %ld died\n", time, philo.index);
-	pthread_mutex_unlock(&philo.table->print);
-	if (is_alive(philo.table) == 0)
-		return ;
-	pthread_mutex_lock(&philo.table->print);
-	if (flag == FORK)
-		printf("%ld %ld has taken a fork\n", time, philo.index);
-	else if (flag == EAT)
-		printf("%ld %ld is eating\n", time, philo.index);
-	else if (flag == SLEEP)
-		printf("%ld %ld is sleeping\n", time, philo.index);
-	else if (flag == THINK)
-		printf("%ld %ld is thinking\n", time, philo.index);
-	pthread_mutex_unlock(&philo.table->print);
-}
-
-void	to_pass_time(t_philo *philo, long time)
-{
-	long	start;
-
-	start = ft_time();
-	while ((ft_time() - start) < time)
-	{
-		if(is_alive(philo->table) == 0)
-			break;
-		usleep(50);
-	}
-}
 
 void	get_forks(t_philo *philo, pthread_mutex_t *first, pthread_mutex_t *sec)
 {
@@ -116,7 +73,7 @@ void	*routine(void *philo)
 	{
 		if (max_meals && meals > max_meals)
 			break ;
-		if (is_alive(tmp->table)== 0)
+		if (is_alive(tmp->table) == 0)
 			break ;
 		to_eat(philo);
 		if (is_alive(tmp->table) == 0)
@@ -126,130 +83,25 @@ void	*routine(void *philo)
 	return (NULL);
 }
 
-void	kill_simulation(t_table *table)
-{
-	pthread_mutex_lock(&table->monitor);
-	table->simulation = 0;
-	pthread_mutex_unlock(&table->monitor);
-}
-
-int	wait_to_starve(t_table *table, long philo)
-{
-	long	time;
-	long	last;
-	long	to_die;
-	long	idx;
-
-	idx = 0;
-	while (idx < philo)
-	{
-		time = ft_time();
-		pthread_mutex_lock(&table->monitor);
-		last = table->philos[idx].last_meal;
-		to_die = table->to_die;
-		pthread_mutex_unlock(&table->monitor);
-		if (time - last > to_die)
-		{
-			/*
-			pthread_mutex_lock(&table->monitor);
-			table->simulation = 0;
-			pthread_mutex_unlock(&table->monitor);
-			*/
-			kill_simulation(table);
-			philo_print(table->philos[idx], DIED);
-			return (1);
-		}
-		idx++;
-	}
-	return (0);
-}
-
-int	wait_to_eat(t_table *table, long philos, long max_meals)
-{
-	long	meals;
-	long	has_eaten;
-	long	idx;
-
-	idx = 0;
-	has_eaten = 0;
-	meals = 0;
-	while (max_meals && idx < philos)
-	{
-		pthread_mutex_lock(&table->monitor);
-		meals = table->philos[idx].meals;
-		pthread_mutex_unlock(&table->monitor);
-		if (meals >= max_meals)
-			has_eaten++;
-		if (philos == has_eaten)
-		{
-			kill_simulation(table);
-			return (1);
-		}
-		idx++;
-	}
-	return (0);
-}
-
-void	waiter(t_table *table)
-{
-	long	max_meals;
-	long	philos;
-
-	pthread_mutex_lock(&table->monitor);
-	max_meals = table->max_meals;
-	philos = table->philo;
-	pthread_mutex_unlock(&table->monitor);
-	while(1)
-	{
-		if (wait_to_starve(table, philos))
-			break ;
-		if (wait_to_eat(table, philos, max_meals))
-			break ;
-		/*
-		if (max_meals)
-		{
-			pthread_mutex_lock(&table->monitor);
-			meals = table->philos[idx].meals;
-			pthread_mutex_unlock(&table->monitor);
-			if (meals >= max_meals)
-				has_eaten++;
-			if (idx + 1 == philos && philos == has_eaten)
-				return;
-			if (idx + 1 == philos)
-			{
-				has_eaten = 0;
-				idx = -1;
-			}
-		}
-		*/
-		usleep(500);
-	}
-}
-
-void	ft_lone(t_philo *philo)
-{
-	philo_print(*philo, FORK);
-	to_pass_time(philo, philo->table->to_die);
-}
-
 void	init_simulation(t_table *table)
 {
-	int	index;
+	int	idx;
 
-	index = 0;
+	idx = 0;
 	table->start = ft_time();
 	if (table->philo == 1)
 		ft_lone(table->philos);
-	while (table->philo != 1 && index < table->philo)
+	while (table->philo != 1 && idx < table->philo)
 	{
-		pthread_create(&table->philos[index].thread, NULL, routine, &table->philos[index]);
-		index++;
+		pthread_create(&table->philos[idx].thread, NULL,
+			routine, &table->philos[idx]);
+		idx++;
 	}
-	index = 0;
+	idx = 0;
 	waiter(table);
-	while (index < table->philo)
+	while (idx < table->philo)
 	{
-		pthread_join(table->philos[index].thread, NULL);
-		index++;
+		pthread_join(table->philos[idx].thread, NULL);
+		idx++;
 	}
 }
