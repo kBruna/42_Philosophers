@@ -77,7 +77,7 @@ long	*parsing(int argc, char **argv)
 	while (argv && idx < argc)
 	{
 		temp = ft_atol(argv[idx]);
-		if (temp == -1)
+		if (temp <= 0)
 		{
 			free(nbr);
 			return_error("Invalid input", 0);

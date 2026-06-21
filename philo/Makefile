@@ -28,6 +28,8 @@ CFLAGS_TEST	= -Wall -Wextra -Werror -g3 -pthread
 
 SRCS_FILES	= main.c \
 			  parsing.c \
+			  monitor.c		\
+			  sim_utils.c	\
 			  philo_lib.c	\
 			  philo_utils.c	\
 			  init_structs.c	\
